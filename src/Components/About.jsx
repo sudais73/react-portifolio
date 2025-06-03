@@ -2,7 +2,7 @@ import React from "react";
 import aboutimg from "../assets/hero.jpg";
 const About = () => {
   return (
-    <div className="bg-black text-white py-20" id="about">
+    <div className="bg-black text-white py-20 scroll-smooth" id="about">
       <div className="container mx-auto px-8 md:px-16 lg:px-24">
         <h2 className="text-4xl font-bold text-center mb-10">About me</h2>
         <div className="flex flex-col md:flex-row items-center md:space-x-12">
