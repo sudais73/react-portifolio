@@ -1,22 +1,52 @@
-import React from 'react'
-import { Link } from 'react-scroll'
+import { useState } from 'react';
+import { FaBars, FaTimes } from 'react-icons/fa';
 
-const Navbar = () => {
+function Navbar() {
+  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Close menu when clicking on a link
+  const closeMobileMenu = () => setMobileMenuOpen(false);
+
   return (
-    <div className='bg-black text-white px-8 md:px-16 lg:px-24 sticky top-0 z-40 ' id='navbar'>
-      <div className='container py-2 flex justify-center md:justify-between items-center'>
-        <div className='text-2xl font-bold hidden md:inline'>Sudais</div>
-        <div className='space-x-6'>
-            <Link  className='hover:text-gray-400 hover:bg-opacity-50'  to= "hero" smooth={true} duration={500}>Home</Link>
-            <Link  className='hover:text-gray-400'  to="about" smooth={true} duration={500}>About</Link>
-            <Link className='hover:text-gray-400'  to="services" smooth={true} duration={500}>Services</Link>
-            <Link className='hover:text-gray-400'  to="project" smooth={true} duration={500}>Project</Link>
-            <Link  className='hover:text-gray-400'  to="contact" smooth={true} duration={500}>Contact</Link>
-        </div>
-        <Link   className='bg-gradient-to-r from-green-400 to-blue-500 hidden md:inline transform transition-transform duration-300 hover:scale-105 px-4 py-2 rounded-full' to= "contact" smooth={true} duration={500}>Contact Me</Link>
-      </div>
-    </div>
-  )
-}
+    <header className="bg-gray-800 text-white p-4 sticky top-0 z-50">
+      <div className="flex justify-between items-center">
+        {/* Logo */}
+        <div className="text-2xl font-bold">YourLogo</div>
+        
+        {/* Mobile Menu Button (visible only on small screens) */}
+        <button 
+          className="md:hidden text-xl p-2 focus:outline-none"
+          onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+        >
+          {isMobileMenuOpen ? (
+            <FaTimes className="text-red-400 hover:text-red-300" />
+          ) : (
+            <FaBars className="hover:text-blue-300" />
+          )}
+        </button>
 
+        {/* Desktop Navigation (hidden on small screens) */}
+        <nav className="hidden md:flex space-x-6">
+          <a href="#home" className="hover:text-blue-300">Home</a>
+          <a href="#about" className="hover:text-blue-300">About</a>
+          <a href="#projects" className="hover:text-blue-300">Projects</a>
+          <a href="#contact" className="hover:text-blue-300">Contact</a>
+        </nav>
+      </div>
+      
+      {/* Mobile Menu (only for small screens) */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden absolute top-16 left-0 right-0 bg-gray-900 shadow-lg z-40">
+          <div className="flex flex-col p-4 space-y-4">
+            <a href="#home" className="py-2 hover:text-blue-300" onClick={closeMobileMenu}>Home</a>
+            <a href="#about" className="py-2 hover:text-blue-300" onClick={closeMobileMenu}>About</a>
+            <a href="#projects" className="py-2 hover:text-blue-300" onClick={closeMobileMenu}>Projects</a>
+            <a href="#contact" className="py-2 hover:text-blue-300" onClick={closeMobileMenu}>Contact</a>
+          </div>
+        </div>
+      )}
+    </header>
+  );
+}
 export default Navbar
